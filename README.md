@@ -1,4 +1,4 @@
-# Enunciado Evaluación Individual de Laboratorio - Modelo X
+# Enunciado Evaluación Individual de Laboratorio - Modelo A
 **Si usted entrega sin haber sido verificada su identidad no podrá ser evaluado.**
 
 ## Tienda Online
@@ -12,6 +12,12 @@ Realice los siguientes ejercicios:
 ### 1. Creación de tabla. 1 punto
 
 Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
+
+Necesitamos conocer la garantía de nuestros productos. Para ello se propone la creación de una nueva tabla llamada `Garantias`. Cada producto tendrá como máximo una garantía (no todos los productos tienen garantía), y cada garantía estará relacionada con un producto.
+
+Para cada garantía necesitamos conocer la fecha de inicio de la garantía, la fecha de fin de la garantía, si tiene garantía extendida o no.
+
+Asegure que la fecha de fin de la garantía es posterior a la fecha de inicio.
 
 ### 2. Consultas SQL (DQL). 3,5 puntos
 

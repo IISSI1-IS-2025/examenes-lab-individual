@@ -29,9 +29,18 @@ Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
 #### 2.3. 1,75 puntos
 
-### 3. Procedimiento. 3,5 puntos
+### 3. Procedimiento. Bonificar pedido retrasado. 3,5 puntos
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
+
+Cree un procedimiento que permita bonificar un pedido que se ha retrasado debido a la mala gestión del empleado a cargo.
+Recibirá un identificador de pedido, asignará a otro empleado como gestor y reducirá un 20% el precio unitario de cada línea de pedido asociada a ese pedido.
+
+Asegure que el pedido estaba asociado a un empleado y en caso contrario lance excepción con el siguiente mensaje:
+
+`El pedido no tiene gestor`.
+
+Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna.
 
 ### 4. Trigger. 2 puntos
 

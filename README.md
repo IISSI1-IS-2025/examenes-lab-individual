@@ -29,11 +29,19 @@ Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
 #### 2.3. 1,75 puntos
 
-### 3. Procedimiento. 3,5 puntos
+### 3. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. 3,5 puntos.
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 
-### 4. Trigger. 2 puntos
+Cree un procedimiento que permita actualizar el precio de un producto dado y que modifique los precios de las líneas de pedido asociadas al producto dado solo en aquellos pedidos que aún no hayan sido enviados.
+
+Asegure que el nuevo precio no sea un 50% menor que el precio actual y lance excepción si se da el caso con el siguiente mensaje:
+
+`No se permite rebajar el precio más del 50%`.
+
+Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna.
+
+### 4. Trigger. 2 puntos.
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 

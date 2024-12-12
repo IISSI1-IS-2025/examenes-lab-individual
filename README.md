@@ -5,6 +5,8 @@
 
 Partiendo de la `tiendaOnline` vista durante los laboratorios descrita en el modelado conceptual siguiente:
 
+![tiendaOnlineModeladoConceptual](https://github.com/user-attachments/assets/92eb4ba8-1ed8-488b-bb5b-448c0836fee6)
+
 Las tablas y datos de prueba iniciales se encuentran en los ficheros `0.creacionTablas.sql` y `0.poblarBd.sql`.
 
 Realice los siguientes ejercicios:

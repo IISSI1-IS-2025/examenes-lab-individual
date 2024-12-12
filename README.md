@@ -15,6 +15,11 @@ Realice los siguientes ejercicios:
 
 Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
+
+Necesitamos conocer los pagos que se realicen sobre los pedidos. Para ello se propone la creación de una nueva tabla llamada `Pagos`. Cada pedido podrá tener asociado varios pagos y cada pago solo corresponde con un pedido en concreto.
+
+Para cada pago necesitamos conocer la fecha de pago, la cantidad pagada (que no puede ser negativa) y si el pago ha sido revisado o no (por defecto no estará revisado).
+
 ### 2. Consultas SQL (DQL). 3,5 puntos
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
@@ -28,6 +33,15 @@ Incluya su solución en el fichero `2.solucionConsultas.sql`.
 ### 3. Procedimiento. 3,5 puntos
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
+
+Cree un procedimiento que permita crear un nuevo producto con posibilidad de que sea para regalo.
+Si el producto está destinado a regalo se creará un pedido con ese producto y costes 0€ para el cliente más antiguo.
+
+Asegure que el precio del producto para regalo no debe superar los 50 euros y lance excepción si se da el caso con el siguiente mensaje:
+
+`No se permite crear un producto para regalo de más de 50€`.
+
+Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna.
 
 ### 4. Trigger. 2 puntos
 

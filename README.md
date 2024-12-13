@@ -47,6 +47,8 @@ Garantice que o bien se realizan todas las operaciones o bien no se realice ning
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
+Cree un procedimiento llamado `t_limitar_importe_pedidos_de_menores` que impida que, a partir de ahora, los pedidos realizados por menores superen los 500€.
+
 ## Procedimiento de entrega:
 
 ### 1. Comprimir ficheros

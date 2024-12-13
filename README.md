@@ -47,6 +47,8 @@ Garantice que o bien se realizan todas las operaciones o bien no se realice ning
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
+Cree un trigger llamado `t_asegurar_mismo_tipo_producto_en_pedidos` que impida que, a partir de ahora, un mismo pedido contenta productos físicos y digitales a la vez.
+
 ## Procedimiento de entrega:
 
 ### 1. Comprimir ficheros

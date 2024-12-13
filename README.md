@@ -46,6 +46,8 @@ Garantice que o bien se realizan todas las operaciones o bien no se realice ning
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
+Cree un trigger llamado `p_limitar_unidades_mensuales_de_productos_fisicos` que, a partir de este momento, impida la venta de más de 1000 unidades al mes de cualquier producto físico.
+
 ## Procedimiento de entrega:
 
 ### 1. Comprimir ficheros

@@ -23,11 +23,11 @@ Para cada valoración necesitamos conocer la puntuación de 1 a 5 (sólo se perm
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 2.1. 0,75 puntos
+#### 2.1. Devuelva el nombre del producto, el precio unitario y las unidades compradas para las 5 líneas de pedido con más unidades. (0,75 puntos)
 
 #### 2.2. 1 punto
 
-#### 2.3. 1,75 puntos
+#### 2.3. Devuelva el nombre del empleado, la fecha de realización del pedido, el precio total del pedido y las unidades totales del pedido para todos los pedidos que de más 7 días de antigüedad desde que se realizaron. Si un pedido no tiene asignado empleado, también debe aparecer en el listado devuelto. (1,75 puntos)
 
 ### 3. Procedimiento. Bonificar pedido retrasado. 3,5 puntos
 

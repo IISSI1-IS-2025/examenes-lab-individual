@@ -1,4 +1,4 @@
-# Enunciado Evaluación Individual de Laboratorio - Modelo X
+# Enunciado Evaluación Individual de Laboratorio - Modelo B
 **Si usted entrega sin haber sido verificada su identidad no podrá ser evaluado.**
 
 ## Tienda Online

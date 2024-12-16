@@ -11,7 +11,7 @@ Las tablas y datos de prueba iniciales se encuentran en los ficheros `0.creacion
 
 Realice los siguientes ejercicios:
 
-### 1. Creación de tabla. 1 punto
+### 1. Creación de tabla. (1,5 puntos)
 
 Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
@@ -19,28 +19,25 @@ Necesitamos conocer la opinión de nuestros clientes sobre nuestros productos. P
 
 Para cada valoración necesitamos conocer la puntuación de 1 a 5 (sólo se permiten enteros) y la fecha en que se realiza la valoración.
 
-### 2. Consultas SQL (DQL). 3,5 puntos
+### 2. Consultas SQL (DQL). 3 puntos
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 2.1. Devuelva el nombre del producto, el precio unitario y las unidades compradas para las 5 líneas de pedido con más unidades. (0,75 puntos)
+#### 2.1. Devuelva el nombre del producto, el precio unitario y las unidades compradas para las 5 líneas de pedido con más unidades. (1 punto)
 
-#### 2.2. 1 punto
-
-#### 2.3. Devuelva el nombre del empleado, la fecha de realización del pedido, el precio total del pedido y las unidades totales del pedido para todos los pedidos que de más 7 días de antigüedad desde que se realizaron. Si un pedido no tiene asignado empleado, también debe aparecer en el listado devuelto. (1,75 puntos)
+#### 2.3. Devuelva el nombre del empleado, la fecha de realización del pedido, el precio total del pedido y las unidades totales del pedido para todos los pedidos que de más 7 días de antigüedad desde que se realizaron. Si un pedido no tiene asignado empleado, también debe aparecer en el listado devuelto. (2 puntos)
 
 ### 3. Procedimiento. Bonificar pedido retrasado. 3,5 puntos
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 
-Cree un procedimiento que permita bonificar un pedido que se ha retrasado debido a la mala gestión del empleado a cargo.
-Recibirá un identificador de pedido, asignará a otro empleado como gestor y reducirá un 20% el precio unitario de cada línea de pedido asociada a ese pedido.
+Cree un procedimiento que permita bonificar un pedido que se ha retrasado debido a la mala gestión del empleado a cargo. Recibirá un identificador de pedido, asignará a otro empleado como gestor y reducirá un 20% el precio unitario de cada línea de pedido asociada a ese pedido. (1,5 puntos)
 
-Asegure que el pedido estaba asociado a un empleado y en caso contrario lance excepción con el siguiente mensaje:
+Asegure que el pedido estaba asociado a un empleado y en caso contrario lance excepción con el siguiente mensaje: (1 punto)
 
 `El pedido no tiene gestor`.
 
-Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna.
+Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna. (1 punto)
 
 ### 4. Trigger. 2 puntos
 

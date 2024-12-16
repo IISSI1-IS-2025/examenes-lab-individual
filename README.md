@@ -20,13 +20,13 @@ Necesitamos conocer los pagos que se realicen sobre los pedidos. Para ello se pr
 
 Para cada pago necesitamos conocer la fecha de pago, la cantidad pagada (que no puede ser negativa) y si el pago ha sido revisado o no (por defecto no estará revisado).
 
-### 2. Consultas SQL (DQL). 3,5 puntos
+### 2. Consultas SQL (DQL). 3 puntos
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
 #### 2.1. Devuelva el nombre del del empleado, la fecha de realización del pedido y el nombre del cliente de todos los pedidos realizados este mes. (1 puntos)
 
-#### 2.3. Devuelva el nombre, las unidades totales pedidas y el importe total gastado de aquellos clientes que han realizado más de 5 pedidos en el último año. (2 puntos)
+#### 2.2. Devuelva el nombre, las unidades totales pedidas y el importe total gastado de aquellos clientes que han realizado más de 5 pedidos en el último año. (2 puntos)
 
 ### 3. Procedimiento. 3,5 puntos
 

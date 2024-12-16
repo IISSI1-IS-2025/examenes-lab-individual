@@ -21,17 +21,17 @@ Para cada garantía necesitamos conocer la fecha de inicio de la garantía, la f
 
 Asegure que la fecha de fin de la garantía es posterior a la fecha de inicio.
 
-### 2. Consultas SQL (DQL). 3,5 puntos
+### 2. Consultas SQL (DQL). (3,5 puntos)
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 2.1. 0,75 puntos
+#### 2.1. Devuelva el nombre del producto, nombre del tipo de producto, y precio unitario al que se vendieron los productos digitales (0,75 puntos)
 
-#### 2.2. 1 punto
+#### 2.2. (1 punto)
 
-#### 2.3. 1,75 puntos
+#### 2.3. Consulta que devuelva el nombre del empleado, el número de pedidos de más de 500 euros gestionados en este año y el importe total de cada uno de ellos, ordenados de mayor a menor importe gestionado. Los empleados que no hayan gestionado ningún pedido, también deben aparecer. (1,75 puntos)
 
-### 3. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. 3,5 puntos.
+### 3. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. (3,5 puntos)
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 

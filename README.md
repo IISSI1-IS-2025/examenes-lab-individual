@@ -11,7 +11,7 @@ Las tablas y datos de prueba iniciales se encuentran en los ficheros `0.creacion
 
 Realice los siguientes ejercicios:
 
-### 1. Creación de tabla. 1 punto
+### 1. Creación de tabla. (1,5 puntos)
 
 Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
@@ -24,24 +24,21 @@ Para cada pago necesitamos conocer la fecha de pago, la cantidad pagada (que no 
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 2.1. Devuelva el nombre del del empleado, la fecha de realización del pedido y el nombre del cliente de todos los pedidos realizados este mes. (0,75 puntos)
+#### 2.1. Devuelva el nombre del del empleado, la fecha de realización del pedido y el nombre del cliente de todos los pedidos realizados este mes. (1 puntos)
 
-#### 2.2.  1 punto
-
-#### 2.3. Devuelva el nombre, las unidades totales pedidas y el importe total gastado de aquellos clientes que han realizado más de 5 pedidos en el último año. (1,75 puntos)
+#### 2.3. Devuelva el nombre, las unidades totales pedidas y el importe total gastado de aquellos clientes que han realizado más de 5 pedidos en el último año. (2 puntos)
 
 ### 3. Procedimiento. 3,5 puntos
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 
-Cree un procedimiento que permita crear un nuevo producto con posibilidad de que sea para regalo.
-Si el producto está destinado a regalo se creará un pedido con ese producto y costes 0€ para el cliente más antiguo.
+Cree un procedimiento que permita crear un nuevo producto con posibilidad de que sea para regalo. Si el producto está destinado a regalo se creará un pedido con ese producto y costes 0€ para el cliente más antiguo. (1,5 puntos)
 
-Asegure que el precio del producto para regalo no debe superar los 50 euros y lance excepción si se da el caso con el siguiente mensaje:
+Asegure que el precio del producto para regalo no debe superar los 50 euros y lance excepción si se da el caso con el siguiente mensaje: (1 punto)
 
 `No se permite crear un producto para regalo de más de 50€`.
 
-Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna.
+Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna. (1 punto)
 
 ### 4. Trigger. 2 puntos
 

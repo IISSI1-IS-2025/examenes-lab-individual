@@ -41,7 +41,7 @@ Asegure que el nuevo precio no sea un 50% menor que el precio actual y lance exc
 
 Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna. (1 punto)
 
-### 4. Trigger. 2 puntos.
+### 4. Trigger. (2 puntos)
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 

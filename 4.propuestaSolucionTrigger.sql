@@ -23,7 +23,7 @@ BEGIN
     WHERE lp.pedidoId = NEW.pedidoId
     LIMIT 1;
 
-    -- Si el pedido ya tiene líneas, comparar los tipos
+    -- Si el pedido ya tiene líneas, comparar los tipos y lanzar excepción si son diferentes
     IF v_tipoProductoExistente IS NOT NULL AND v_tipoProductoExistente <> v_tipoProductoNuevo THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El pedido no puede incluir productos de tipos diferentes (físicos y digitales).';

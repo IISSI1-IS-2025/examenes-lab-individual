@@ -33,10 +33,14 @@ BEGIN
     WHERE id = p_productoId;
 
     -- Actualizar las líneas de pedido de pedidos no enviados
-    UPDATE LineasPedido lp
-    JOIN Pedidos p ON lp.pedidoId = p.id
-    SET lp.precio = p_nuevoPrecio
-    WHERE lp.productoId = p_productoId AND p.fechaEnvio IS NULL;
+    UPDATE LineasPedido
+    SET precio = p_nuevoPrecio
+    WHERE productoId = p_productoId
+      AND pedidoId IN (
+          SELECT id
+          FROM Pedidos
+          WHERE fechaEnvio IS NULL
+      );
 
     -- Confirmar transacción
     COMMIT;

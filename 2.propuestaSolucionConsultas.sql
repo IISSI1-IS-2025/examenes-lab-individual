@@ -13,30 +13,81 @@ WHERE
     tp.nombre = 'Digitales';
 
 
--- 2.2
-SELECT 
+-- 2.2 Solución admisible con condición en LEFT JOIN
+SELECT
     u.nombre AS nombre_empleado,
     COUNT(DISTINCT p.id) AS numero_pedidos_mas_de_500,
     SUM(lp.precio * lp.unidades) AS importe_total
-FROM 
+FROM
     Empleados e
-LEFT JOIN 
+LEFT JOIN
     Usuarios u ON e.usuarioId = u.id
-LEFT JOIN 
-    Pedidos p ON e.id = p.empleadoId
-LEFT JOIN 
+LEFT JOIN
+    Pedidos p ON e.id = p.empleadoId AND YEAR(p.fechaRealizacion) = YEAR(CURDATE()) -- Filtrar pedidos del año actual
+LEFT JOIN
     LineasPedido lp ON p.id = lp.pedidoId
-GROUP BY 
+GROUP BY
     u.nombre
-HAVING 
+HAVING
+    SUM(lp.precio * lp.unidades) > 500 OR numero_pedidos_mas_de_500 = 0 -- Incluye empleados sin pedidos
+ORDER BY
+    importe_total DESC;
+
+
+-- 2.2 Solución admisible con condición en HAVING (no aparecen empleados sin pedidos)
+SELECT
+    u.nombre AS nombre_empleado,
+    COUNT(DISTINCT p.id) AS numero_pedidos_mas_de_500,
+    SUM(lp.precio * lp.unidades) AS importe_total
+FROM
+    Empleados e
+LEFT JOIN
+    Usuarios u ON e.usuarioId = u.id
+LEFT JOIN
+    Pedidos p ON e.id = p.empleadoId
+LEFT JOIN
+    LineasPedido lp ON p.id = lp.pedidoId
+WHERE
+    YEAR(p.fechaRealizacion) = YEAR(CURDATE()) -- Filtrar pedidos realizados en el año actual
+GROUP BY
+    u.nombre
+HAVING
     SUM(lp.precio * lp.unidades) > 500 OR numero_pedidos_mas_de_500 = 0 -- Incluye empleados con pedidos > 500
-ORDER BY 
+ORDER BY
     importe_total DESC;
 
 
 
-SELECT SUM(lp2.precio * lp2.unidades) as totalPedido, lp2.pedidoId
-         FROM LineasPedido lp2 
-         group by lp2.pedidoId
-         having totalPedido>500
-         
+-- 2.2 Solución exahustiva (considera casos raros)
+SELECT
+    u.nombre AS nombre_empleado,
+    COUNT(DISTINCT CASE
+                      WHEN YEAR(p.fechaRealizacion) = YEAR(CURDATE())
+                           AND (SELECT SUM(lp2.precio * lp2.unidades)
+                                FROM LineasPedido lp2
+                                WHERE lp2.pedidoId = p.id) > 500
+                      THEN p.id
+                  END) AS numero_pedidos_mas_de_500,
+    SUM(CASE
+            WHEN YEAR(p.fechaRealizacion) = YEAR(CURDATE())
+                 AND (SELECT SUM(lp2.precio * lp2.unidades)
+                      FROM LineasPedido lp2
+                      WHERE lp2.pedidoId = p.id) > 500
+            THEN lp.precio * lp.unidades
+            ELSE 0
+        END) AS importe_total
+FROM
+    Empleados e
+LEFT JOIN
+    Usuarios u ON e.usuarioId = u.id
+LEFT JOIN
+    Pedidos p ON e.id = p.empleadoId
+LEFT JOIN
+    LineasPedido lp ON p.id = lp.pedidoId
+GROUP BY
+    u.nombre
+HAVING
+    numero_pedidos_mas_de_500 > 0
+    OR numero_pedidos_mas_de_500 = 0 -- Incluye empleados sin pedidos
+ORDER BY
+    importe_total DESC;

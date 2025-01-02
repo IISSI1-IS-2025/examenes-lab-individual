@@ -6,7 +6,8 @@ CREATE TABLE Garantias (
     fechaFin DATE NOT NULL,
     esExtendida BOOLEAN NOT NULL,
     FOREIGN KEY (productoId) REFERENCES Productos(id),
-    CHECK (fechaFin > fechaInicio)
+    CHECK (fechaFin > fechaInicio),
+    UNIQUE (productoId)
 );
 
 -- Ejemplo de inserción de datos

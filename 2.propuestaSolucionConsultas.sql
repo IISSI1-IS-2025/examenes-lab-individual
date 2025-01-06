@@ -27,7 +27,7 @@ LEFT JOIN
 LEFT JOIN
     LineasPedido lp ON p.id = lp.pedidoId
 GROUP BY
-    u.nombre
+    u.id, u.nombre
 HAVING
     SUM(lp.precio * lp.unidades) > 500 OR numero_pedidos_mas_de_500 = 0 -- Incluye empleados sin pedidos
 ORDER BY
@@ -50,7 +50,7 @@ LEFT JOIN
 WHERE
     YEAR(p.fechaRealizacion) = YEAR(CURDATE()) -- Filtrar pedidos realizados en el año actual
 GROUP BY
-    u.nombre
+    u.id, u.nombre
 HAVING
     SUM(lp.precio * lp.unidades) > 500 OR numero_pedidos_mas_de_500 = 0 -- Incluye empleados con pedidos > 500
 ORDER BY
@@ -85,7 +85,7 @@ LEFT JOIN
 LEFT JOIN
     LineasPedido lp ON p.id = lp.pedidoId
 GROUP BY
-    u.nombre
+    u.id, u.nombre
 HAVING
     numero_pedidos_mas_de_500 > 0
     OR numero_pedidos_mas_de_500 = 0 -- Incluye empleados sin pedidos

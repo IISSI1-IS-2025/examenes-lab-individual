@@ -60,6 +60,9 @@ CREATE TABLE Productos (
     descripción TEXT,
     precio DECIMAL(10, 2) NOT NULL CHECK (precio >= 0),
     tipoProductoId INT NOT NULL,
+	stock INT NOT NULL DEFAULT 10, 
+	-- Se pone este "default" porque "stock" no existía previamente en el ejercicio,
+	-- evitando por tanto cambiar todos los INSERT de la población.
     puedeVenderseAMenores BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (tipoProductoId) REFERENCES TiposProducto(id)
 );

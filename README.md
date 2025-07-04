@@ -17,49 +17,54 @@ Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
 Necesitamos conocer las promociones de nuestros productos. Para ello se propone la creación de una nueva tabla llamada `Promociones`. Cada promoción solo estará relacionada con un producto, de manera que no todos los productos están promocionados.
 
-Para cada promoción necesitamos conocer el descuento aplicado, la fecha de inicio y fecha de fin de la promoción.
+Para cada promoción necesitamos conocer el descuento aplicado en forma de un valor mayor que 0 y menor o igual a 1, la fecha de inicio y fecha de fin de la promoción.
 
 Asegure que la fecha de fin de la promoción es posterior a la fecha de inicio.
 
-### 2. Procedimiento. 1 punto
+### 2. Inserción de datos. 1 punto
 
 Incluya su solución en el fichero `2.solucionInsercionTabla.sql`.
+A continuación, se detallan las promociones a ingresar:
 
-Complete el procedimiento almacenado que se encuentra en el fichero para insertar una nueva promoción con los datos pasados como parámetros. 
+* Para el producto con ID 1, que corresponde a un smartphone, se aplicaron estas promociones:
+    * un 10% de descuento, vigente desde el 1 de enero de 2024 hasta el 15 de enero de 2024.
+    * un 15% de descuento, vigente desde el 1 de enero de 2025 hasta el 15 de enero de 2025.
+    * un 20% de descuento, vigente desde el 1 de junio de 2025 hasta el 30 de junio de 2025.
+* Para el producto con ID 2, que corresponde a un laptop, tiene las siguientes promociones:
+    * 30% de descuento, válida desde el 1 de julio de 2024 hasta el 31 de julio de 2024.
+    * 20% de descuento, válida desde el 1 de julio de 2025 hasta el 31 de julio de 2025.
+* Para el producto con ID 3, un libro electrónico, se ofrece un 10% de descuento, desde el 1 de julio de 2025 hasta el 31 de julio de 2025.
+* El producto con ID 4, correspondiente a un videojuego, tiene programada una promoción del 40% de descuento, que estará vigente del 1 al 31 de agosto de 2025.
+* El producto con ID 7, una película, tuvo una promoción del 5% de descuento desde el 1 hasta el 30 de junio de 2025.
+* Por último, el producto con ID 9, una tableta gráfica, cuenta con una promoción activa del 10% de descuento, vigente del 1 al 31 de julio de 2025.
 
-Una vez que se ha compilado el procedimiento, ejecute el fichero `0.3.poblarPromociones.sql`.
+### 3. Consultas. 3,5 puntos
 
-### 2. Consultas. 3,5 puntos
+Incluya sus soluciones en el fichero `3.solucionConsultas.sql`.
 
-Incluya su solución en el fichero `3.solucionConsultas.sql`.
+#### 3.1. (1 punto)
 
-#### 2.1. 0,75 puntos
+Obtener los ids y nombres de productos que no tienen ninguna promoción asociada.
 
-Obtener las promociones activas actualmente, junto con los productos implicados y precios finales tras aplicar descuento.
+#### 3.2. (1,25 puntos)
 
-#### 2.2. 1 punto
+Obtener las los productos con promociones activas. El resultado debe incluir el id y el nombre del producto, el precio sin promoción y el precio con la promoción aplicada.
 
-Productos nunca promocionados hasta la fecha.
+#### 3.3 (1,25 puntos)
 
-#### 2.3. 1,75 puntos
-
-Pensar una consulta (?)
+Obtener los productos ordenados por el número de promociones que tienen asociadas. El resultado debe incluir el id del producto, el nombre del producto y el número de promociones asociadas. Si un producto nunca ha sido promocionado también debe aparecer entre los resultados.
 
 ### 4. Trigger. 2 puntos
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
-Cree un trigger llamado `trg_actualizar_precio_pedido_promocion` que, al insertar una nueva línea de pedido, automáticamente aplique el precio con descuento si hay promoción activa.
-
-Genere un caso de prueba que inserte un nuevo pedido y agregue al menos tres líneas de pedido, de manera que una línea corresponda a un producto con promoción ya pasada, otra línea con producto en promoción y otra más con promoción aún no activa. Compruebe que el trigger se ha ejecutado de la manera esperada.
+Cree un trigger llamado `trg_actualizar_precio_pedido_promocion` que aplique las promociones activas cuando se realice un pedido.
 
 ### 5. Procedimiento. 2,5 puntos
 
 Incluya su solución en el fichero `5.solucionProcedimiento.sql`.
 
-Cree un procedimiento almacenado con transacción llamado `p_anularPedido` que reciba como parámetro un número de pedido. Deberá actualizar el campo de stock de producto, así como eliminar las líneas de pedido y el propio pedido.
-
-Prueba este procedimiento anulando el pedido con el que se ha probado el apartado anterior. Compruebe que el procedimiento se ha ejecutado de la manera esperada.
+Cree un procedimiento almacenado con transacción llamado `p_anularPedido` que reciba como parámetro un número de pedido. Deberá actualizar el campo de stock de aquellos productos que participaban del pedido, así como eliminar las líneas de pedido y el propio pedido.
 
 ## Procedimiento de entrega:
 

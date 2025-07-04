@@ -12,40 +12,48 @@ CREATE TABLE Promociones (
 );
 
 -------------------------------------------------------------------
--- 2.1: Procedimiento de inserción de datos en la tabla Promociones
-DELIMITER //
-CREATE PROCEDURE insertarPromocion(	IN p_productoId INT,
-									IN p_descuento DECIMAL(4,2),
-									IN p_fechaInicio DATE,
-									IN p_fechaFin DATE)
-BEGIN
-	INSERT INTO Promociones(productoId, descuento, fechaInicio, fechaFin)
-	VALUES (p_productoId, p_descuento, p_fechaInicio, p_fechaFin);
-END //
-DELIMITER ;
+-- 2.1: Inserción de datos en la tabla Promociones
+INSERT INTO Promociones (productoId, descuento, fechaInicio, fechaFin) VALUES
+(1, 0.10, '2024-01-01', '2024-01-15'), -- Smartphone (ya ha pasado)
+(1, 0.15, '2025-01-01', '2025-01-15'), -- Smartphone (ya ha pasado)
+(1, 0.20, '2025-06-01', '2025-06-30'), -- Smartphone (ya ha pasado)
+(2, 0.30, '2024-07-01', '2024-07-31'), -- Laptop (ya ha pasado)
+(2, 0.20, '2025-07-01', '2025-07-31'), -- Laptop (activo)
+(3, 0.10, '2025-07-01', '2025-07-31'), -- Libro Electrónico (activo)
+(4, 0.40, '2025-08-01', '2025-08-31'), -- Videojuego (próximamente)
+(7, 0.05, '2025-06-01', '2025-06-30'), -- Película (ya ha pasado)
+(9, 0.10, '2025-07-01', '2025-07-31'); -- Tableta gráfica (activo)
 
---------------------------------------------------------------------------------------------------------------
--- 3.1: Obtener las promociones activas actualmente, junto con los productos implicados y precios finales tras aplicar descuento.
-SELECT p.nombre,
-       p.precio AS PrecioOriginal,
-       pr.descuento,
-       ROUND(p.precio * (1 - pr.descuento), 2) AS PrecioFinal,
-       pr.fechaInicio,
-       pr.fechaFin
-FROM Productos p
-JOIN Promociones pr ON p.id = pr.productoId
-WHERE CURRENT_DATE BETWEEN pr.fechaInicio AND pr.fechaFin;
 
------------------------------------------------------
--- 3.2: Productos nunca promocionados hasta la fecha.
+-----------------------------------------------
+-- 3.1: 
 SELECT p.nombre, p.precio
 FROM Productos p
 LEFT JOIN Promociones pr ON p.id = pr.productoId
 WHERE pr.id IS NULL;
 
------------------------------------------------
--- 3.3: (Opcional) Consulta sin promociones (?)
 
+--------------------------------------------------------------------------------------------------------------
+-- 3.2: Obtener las promociones activas actualmente, junto con los productos implicados y precios finales tras aplicar descuento.
+SELECT p.id,
+       p.nombre,
+       p.precio AS PrecioOriginal,
+       ROUND(p.precio * (1 - pr.descuento), 2) AS PrecioFinal
+FROM Productos p
+JOIN Promociones pr ON p.id = pr.productoId
+WHERE CURRENT_DATE BETWEEN pr.fechaInicio AND pr.fechaFin;
+
+-----------------------------------------------------
+-- 3.3
+
+SELECT 
+    p.id,
+    p.nombre,
+    COUNT(pr.id) AS cantidad_promociones
+FROM Productos p
+LEFT JOIN Promociones pr ON p.id = pr.productoId
+GROUP BY p.id, p.nombre
+ORDER BY cantidad_promociones DESC;
 
 
 ------------------------------------------------------------------------------------------------------------
@@ -55,7 +63,7 @@ DELIMITER //
 CREATE OR REPLACE TRIGGER trg_actualizar_precio_pedido_promocion
 BEFORE INSERT ON LineasPedido FOR EACH ROW 
 BEGIN
-	 DECLARE descuentoActivo DECIMAL(4,2);
+	DECLARE descuentoActivo DECIMAL(4,2);
 	 
     SELECT descuento INTO descuentoActivo
     FROM Promociones
@@ -69,7 +77,7 @@ END //
 DELIMITER ;
 
 ----------------------------------------------
--- 4.2: Caso de estudio para forzar el trigger
+-- Caso de estudio para forzar el trigger
 
 INSERT INTO Pedidos (fechaRealizacion, fechaEnvio, direccionEntrega, comentarios, clienteId, empleadoId) VALUES
 ('2025-07-08', '2025-07-09', '123 Calle Principal', 'Pedido con importe bajo', 1, 1);
@@ -112,6 +120,6 @@ END //
 DELIMITER ;
 
 --------------------------------
--- 5.2: Llamada al procedimiento
+-- Llamada al procedimiento
 
 CALL p_anularPedido(16);

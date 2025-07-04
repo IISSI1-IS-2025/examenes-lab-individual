@@ -1,4 +1,5 @@
 # Enunciado del Examen Individual de Laboratorio - Segunda Convocatoria
+
 **Si usted entrega sin haber sido verificada su identidad no podrá ser evaluado.**
 
 ## Tienda Online
@@ -27,12 +28,12 @@ Incluya su solución en el fichero `2.solucionInsercionTabla.sql`.
 A continuación, se detallan las promociones a ingresar:
 
 * Para el producto con ID 1, que corresponde a un smartphone, se aplicaron estas promociones:
-    * un 10% de descuento, vigente desde el 1 de enero de 2024 hasta el 15 de enero de 2024.
-    * un 15% de descuento, vigente desde el 1 de enero de 2025 hasta el 15 de enero de 2025.
-    * un 20% de descuento, vigente desde el 1 de junio de 2025 hasta el 30 de junio de 2025.
+  * un 10% de descuento, vigente desde el 1 de enero de 2024 hasta el 15 de enero de 2024.
+  * un 15% de descuento, vigente desde el 1 de enero de 2025 hasta el 15 de enero de 2025.
+  * un 20% de descuento, vigente desde el 1 de junio de 2025 hasta el 30 de junio de 2025.
 * Para el producto con ID 2, que corresponde a un laptop, tiene las siguientes promociones:
-    * 30% de descuento, válida desde el 1 de julio de 2024 hasta el 31 de julio de 2024.
-    * 20% de descuento, válida desde el 1 de julio de 2025 hasta el 31 de julio de 2025.
+  * 30% de descuento, válida desde el 1 de julio de 2024 hasta el 31 de julio de 2024.
+  * 20% de descuento, válida desde el 1 de julio de 2025 hasta el 31 de julio de 2025.
 * Para el producto con ID 3, un libro electrónico, se ofrece un 10% de descuento, desde el 1 de julio de 2025 hasta el 31 de julio de 2025.
 * El producto con ID 4, correspondiente a un videojuego, tiene programada una promoción del 40% de descuento, que estará vigente del 1 al 31 de agosto de 2025.
 * El producto con ID 7, una película, tuvo una promoción del 5% de descuento desde el 1 hasta el 30 de junio de 2025.
@@ -66,7 +67,7 @@ Incluya su solución en el fichero `5.solucionProcedimiento.sql`.
 
 Cree un procedimiento almacenado con transacción llamado `p_anularPedido` que reciba como parámetro un número de pedido. Deberá actualizar el campo de stock de aquellos productos que participaban del pedido, así como eliminar las líneas de pedido y el propio pedido.
 
-## Procedimiento de entrega:
+## Procedimiento de entrega
 
 ### 1. Comprimir ficheros
 

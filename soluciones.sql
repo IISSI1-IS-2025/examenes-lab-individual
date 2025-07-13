@@ -8,7 +8,7 @@ CREATE TABLE Promociones (
     fechaInicio DATE NOT NULL,
     fechaFin DATE NOT NULL,
     CONSTRAINT fk_promocion_producto FOREIGN KEY (productoId) REFERENCES Productos(id),
-    CONSTRAINT chk_fechas_validas CHECK (fechaInicio <= fechaFin)
+    CONSTRAINT chk_fechas_validas CHECK (fechaInicio < fechaFin)
 );
 
 -------------------------------------------------------------------

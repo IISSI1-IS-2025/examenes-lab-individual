@@ -27,7 +27,7 @@ INSERT INTO Promociones (productoId, descuento, fechaInicio, fechaFin) VALUES
 
 -----------------------------------------------
 -- 3.1: 
-SELECT p.nombre, p.precio
+SELECT p.id, p.nombre
 FROM Productos p
 LEFT JOIN Promociones pr ON p.id = pr.productoId
 WHERE pr.id IS NULL;

@@ -11,39 +11,46 @@ Las tablas y datos de prueba iniciales se encuentran en los ficheros `0.creacion
 
 Realice los siguientes ejercicios:
 
-### 1. Creación de tabla. 1 punto
+### 1. Creación de tabla. 2,5 puntos
 
 Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
-Necesitamos conocer la garantía de nuestros productos. Para ello se propone la creación de una nueva tabla llamada `Garantias`. Cada producto tendrá como máximo una garantía (no todos los productos tienen garantía), y cada garantía estará relacionada con un producto.
+Necesitamos guardar información sobre los envíos realizados por la empresa y el estado de los mismos. Para ello se propone la creación de una nueva tabla llamada `Envios`. Cada pedido se enviará en un solo envío, pero en cada envío se podrán incluir varios pedidos (al menos uno). **(1 punto)**
 
-Para cada garantía necesitamos conocer la fecha de inicio de la garantía, la fecha de fin de la garantía, si tiene garantía extendida o no.
+Además de la creación de la nueva tabla, adicionalmente tendrá que modificarse la tabla de pedidos de forma conveniente **(1 punto)**.
 
-Asegure que la fecha de fin de la garantía es posterior a la fecha de inicio.
+Para cada envío necesitamos conocer la fecha del envío, la fecha de entrega (si la hay) y el estado del mismo, que puede ser "En preparación", "Enviado" o "Entregado". Asegure que la fecha de entrega (si la hay) es posterior a la fecha de envío. **(0,5 puntos)**
+
+### 2. Inserciones. 1 punto
+
+Incluya su solución en el fichero `2.solucionInsercionTabla.sql`.
+
+Inserte dos envíos en la nueva tabla con las siguietnes características:
+
+Envío 1: fecha de envío 23-10-2025, sin fecha de entrega, estado "En preparación". Asociado a los pedidos 1 y 2.
+Envío 2: fecha de envío 03-06-2010, fecha de entrega 05-06-2010, estado "Entregado". Asdociado al pedido 3.
+
+### 3. Consultas. 2 punto
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 2.1. Devuelva el nombre del producto, nombre del tipo de producto, y precio unitario al que se vendieron los productos digitales (1 punto)
+#### 3.1.  (1 punto)
 
-#### 2.2. Consulta que devuelva el nombre del empleado, el número de pedidos de más de 500 euros gestionados en este año y el importe total de cada uno de ellos, ordenados de mayor a menor importe gestionado. Los empleados que no hayan gestionado ningún pedido, también deben aparecer. (2 puntos)
+#### 3.2.  (1 puntos)
 
-### 3. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. (3,5 puntos)
+### 4. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. (2,5 puntos)
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 
-Cree un procedimiento que permita actualizar el precio de un producto dado y que modifique los precios de las líneas de pedido asociadas al producto dado solo en aquellos pedidos que aún no hayan sido enviados. (1,5 puntos)
-
-Asegure que el nuevo precio no sea un 50% menor que el precio actual y lance excepción si se da el caso con el siguiente mensaje: (1 punto)
-
-`No se permite rebajar el precio más del 50%`.
+Cree un procedimiento que permita dar de alta un nuevo envío, con fecha de envío la de hoy, y asignarle todos aquellos pedidos realizados hasta el día de ayer y que NO hayan sido incluídos en ningún otro envío aún. (1,5 puntos)
 
 Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna. (1 punto)
 
-### 4. Trigger. (2 puntos)
+### 5. Trigger. (2 puntos)
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
-Cree un trigger llamado `t_asegurar_mismo_tipo_producto_en_pedidos` que impida que, a partir de ahora, un mismo pedido incluya productos físicos y digitales.
+Cree un trigger llamado `trg_asegurar_envio_pedidos_fisicos` que impida que un pedido sea enviado si no incluye productos físicos.
 
 ## Procedimiento de entrega:
 
@@ -52,9 +59,10 @@ Cree un trigger llamado `t_asegurar_mismo_tipo_producto_en_pedidos` que impida q
 Cree un fichero `zip` que incluya los ficheros:
 
 * `1.solucionCreacionTabla.sql`
-* `2.solucionConsultas.sql`
-* `3.solucionProcedimiento.sql`
-* `4.solucionTrigger.sql`
+* `2.solucionInsercion.sql`
+* `3.solucionConsultas.sql`
+* `4.solucionProcedimiento.sql`
+* `5.solucionTrigger.sql`
 
 ### 2. Subir fichero `zip`
 

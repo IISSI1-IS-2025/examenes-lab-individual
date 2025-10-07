@@ -1,8 +1,9 @@
+-- Eliminación de tablas para asegurar que el script es ejecutable varias veces sin error
 DROP TABLE IF EXISTS lineaspedido;
 DROP TABLE IF EXISTS pedidos;
 DROP TABLE IF EXISTS Envios;
 
-
+-- Creación de la tabla Envíos
 CREATE TABLE Envios (
 
 
@@ -10,11 +11,11 @@ CREATE TABLE Envios (
   
 );
 
--- Modificar para implementar asociación con Envíos
+-- Modificar esta tabla para implementar asociación con Envios
 CREATE TABLE Pedidos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fechaRealizacion DATE NOT NULL,
-    fechaEnvio DATE NOT NULL,
+    fechaEnvio DATE,
     direccionEntrega VARCHAR(255) NOT NULL,
     comentarios TEXT,
     clienteId INT NOT NULL,
@@ -23,9 +24,6 @@ CREATE TABLE Pedidos (
         ON DELETE RESTRICT 
         ON UPDATE RESTRICT,
     FOREIGN KEY (empleadoId) REFERENCES Empleados(id) 
-        ON DELETE SET NULL 
-        ON UPDATE SET NULL,
-   FOREIGN KEY (envioId) REFERENCES Envios(id) 
         ON DELETE SET NULL 
         ON UPDATE SET NULL
 );

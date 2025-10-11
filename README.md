@@ -21,14 +21,18 @@ Además de la creación de la nueva tabla, adicionalmente tendrá que modificars
 
 Para cada envío necesitamos conocer la fecha del envío, la fecha de entrega (si la hay) y el estado del mismo, que puede ser "En preparación", "Enviado" o "Entregado". Asegure que la fecha de entrega (si la hay) es posterior a la fecha de envío. **(0,5 puntos)**
 
+**NOTA:** el fichero `1.solucionCreacionTabla.sql` incluye comentarios y código para facilitar el ejercicio.
+
 ### 2. Inserciones. 1 punto
 
 Incluya su solución en el fichero `2.solucionInsercionTabla.sql`.
 
-Inserte dos envíos en la nueva tabla con las siguietnes características:
+Inserte dos envíos en la nueva tabla con las siguientes características:
 
 Envío 1: fecha de envío 23-10-2025, sin fecha de entrega, estado "En preparación". Asociado a los pedidos 1 y 2.
 Envío 2: fecha de envío 03-06-2010, fecha de entrega 05-06-2010, estado "Entregado". Asdociado al pedido 3.
+
+**NOTA:** el fichero `2.solucionInsercionTabla.sql` incluye comentarios y código para facilitar el ejercicio.
 
 ### 3. Consultas. 2 punto
 

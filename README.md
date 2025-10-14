@@ -42,7 +42,7 @@ Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
 #### 3.2. Consulta para visualizar el valor total de todos los envíos que estén "En preparación" junto con la fecha de creación del envío, ordenados decrecientemente según su valor. (1 puntos)
 
-### 4. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. (2,5 puntos)
+### 4. Procedimiento. Dar de alta un nuevo envío. (2,5 puntos)
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 

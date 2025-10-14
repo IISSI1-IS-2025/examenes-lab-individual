@@ -19,7 +19,7 @@ Necesitamos guardar información sobre los envíos realizados por la empresa y e
 
 Además de la creación de la nueva tabla, adicionalmente tendrá que modificarse la tabla de pedidos de forma conveniente **(1 punto)**.
 
-Para cada envío necesitamos conocer la fecha del envío, la fecha de entrega (si la hay) y el estado del mismo, que puede ser "En preparación", "Enviado" o "Entregado". Asegure que la fecha de entrega (si la hay) es posterior a la fecha de envío. **(0,5 puntos)**
+Para cada envío necesitamos conocer la fecha de creación del envío, la fecha de entrega (si la hay) y el estado del mismo, que puede ser "En preparación", "Enviado" o "Entregado". Asegure que la fecha de entrega (si la hay) es posterior a la fecha de envío. **(0,5 puntos)**
 
 **NOTA:** el fichero `1.solucionCreacionTabla.sql` incluye comentarios y código para facilitar el ejercicio.
 
@@ -38,9 +38,9 @@ Envío 2: fecha de envío 03-06-2010, fecha de entrega 05-06-2010, estado "Entre
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 3.1.  (1 punto)
+#### 3.1. Consulta para listar el nombre de los usuarios cuyos pedidos no han sido entregados (1 punto)
 
-#### 3.2.  (1 puntos)
+#### 3.2. Consulta para visualizar el valor total de todos los envíos que estén "En preparación" junto con la fecha de creación del envío, ordenados decrecientemente según su valor. (1 puntos)
 
 ### 4. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. (2,5 puntos)
 

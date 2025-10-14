@@ -72,11 +72,20 @@ INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
 -----------------------------------------------
 -- 3: Consultas
 -- 3.1: 
-
+SELECT u.nombre
+FROM usuarios u JOIN clientes c ON u.id=c.usuarioId
+JOIN pedidos p ON p.clienteId=c.id
+RIGHT JOIN envios e ON e.id=p.envioId
+WHERE e.id IS NULL OR e.estadoEnvio NOT LIKE 'Entregado';
 
 --------------------------------------------------------------------------------------------------------------
 -- 3.2: 
-
+SELECT e.id, e.fechaEnvio, e.estadoEnvio, SUM(lp.unidades*lp.precio) AS valorTotal
+FROM envios e JOIN pedidos p ON e.id=p.envioId
+JOIN lineaspedido lp ON lp.pedidoId=p.id
+WHERE e.estadoEnvio = 'Enviado'
+GROUP BY e.id
+ORDER BY valorTotal DESC;
 
 
 

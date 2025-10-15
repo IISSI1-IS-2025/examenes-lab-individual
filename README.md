@@ -35,7 +35,7 @@ Inserte los siguientes envíos en la nueva tabla con las siguientes característ
 
 Inserte de nuevo la información de los pedidos y líneas de pedido que se encuentran en el archivo `0.poblarBd.sql` ya que ha debido recrear las tablas de `pedidos` y `lineaspedido`, borrando todas las filas en el proceso. Para los pedidos, recuerde incluir la referencia a los envíos y modificar lo necesario para cumplir con la tercera forma normal (3FN).
 
-**NOTA:** el fichero `2.solucionInsercionTabla.sql` incluye comentarios y código para facilitar el ejercicio.
+**NOTA:** el fichero `2.solucionInsercion.sql` incluye comentarios y código para facilitar el ejercicio.
 
 ### 3. Consultas. 2,5 puntos
 

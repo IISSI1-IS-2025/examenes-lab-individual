@@ -51,7 +51,7 @@ Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 
 Cree un procedimiento que permita dar de alta un nuevo envío, con fecha de envío la de hoy, y asignarle todos aquellos pedidos realizados hasta el día de ayer y que NO hayan sido incluídos en ningún otro envío aún. (1,5 puntos)
 
-Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna. (1 punto)
+Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna. (0,5 puntos)
 
 ### 5. Trigger. (2 puntos)
 

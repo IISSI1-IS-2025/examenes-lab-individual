@@ -33,7 +33,7 @@ Inserte los siguientes envíos en la nueva tabla con las siguientes característ
 * Envío 2: fecha de envío 03/06/2010, fecha de entrega 05/06/2010, estado "Entregado". Asociado al pedido 3.
 * Envío 3: fecha de envío 22/10/2025, sin fecha de entrega, estado "En preparación". Asociado al pedido 5.
 
-Inserte de nuevo la información de los pedidos y líneas de pedido. Para los pedidos, recuerde incluir la referencia a los envíos y modificar lo necesario para cumplir con la tercera forma normal (3FN).
+Inserte de nuevo la información de los pedidos y líneas de pedido que se encuentran en el archivo `0.poblarBd.sql` ya que ha debido recrear las tablas de `pedidos` y `lineaspedido`, borrando todas las filas en el proceso. Para los pedidos, recuerde incluir la referencia a los envíos y modificar lo necesario para cumplir con la tercera forma normal (3FN).
 
 **NOTA:** el fichero `2.solucionInsercionTabla.sql` incluye comentarios y código para facilitar el ejercicio.
 

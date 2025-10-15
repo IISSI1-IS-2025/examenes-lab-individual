@@ -29,10 +29,10 @@ CREATE TABLE Pedidos (
         ON UPDATE RESTRICT,
     FOREIGN KEY (empleadoId) REFERENCES Empleados(id) 
         ON DELETE SET NULL 
-        ON UPDATE SET NULL,
+        ON UPDATE CASCADE,
    FOREIGN KEY (envioId) REFERENCES Envios(id) 
         ON DELETE SET NULL 
-        ON UPDATE SET NULL
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE LineasPedido (
@@ -50,13 +50,21 @@ CREATE TABLE LineasPedido (
 -- 2: Inserción de datos
 INSERT INTO envios (fechaEnvio, fechaEntrega, estadoEnvio) VALUES
 	('2025-10-23', NULL, 'En preparación'),
-	('2010-06-03', '2010-06-05', 'Entregado');
+	('2010-06-03', '2010-06-05', 'Entregado'),
+	('2025-10-22', NULL, 'En preparación');
 
 -- Insertar datos en la tabla Pedidos
+
 INSERT INTO Pedidos (fechaRealizacion, envioId, direccionEntrega, comentarios, clienteId, empleadoId) VALUES
-('2024-10-01', 1, '123 Calle Principal', 'Entregar en la puerta', 1,  1),
-('2024-10-02', 1, '456 Avenida Secundaria', 'Entregar en recepción', 2, NULL),
-('2010-06-01', 2, '123 Calle VeteTuASaber', 'Cliente con movilidad reducida', 1,  2);
+('2024-10-01', 1, '123 Calle Principal', 'Entregar en la puerta. AYUDA: Este pedido estará asociado al envío 1 en preparación', 1,  1),
+('2024-10-02', 1, '456 Avenida Secundaria', 'Entregar en recepción. AYUDA: Este pedido estará asociado al envío 1 en preparación', 2, 1),
+('2010-06-04', 2, '123 Calle VeteTuASaber', 'Cliente con movilidad reducida. AYUDA: Este pedido estará asociado al envío 2 entregado', 1,  2),
+
+-- Insertar pedido con más de 5 productos sin envío
+('2025-10-10', NULL, '123 Calle VeteTuASaber', 'Cliente con movilidad reducida. AYUDA: Este pedido no está asociado a ningún envío', 3,  3),
+-- Insertar pedido con menos de 5 productos con envío en preparación
+('2025-10-12', 3, '123 Calle En preparación', 'Cliente con movilidad reducida. AYUDA: Este pedido estará asociado al envío 3 en preparación', 3,  2);
+
 
 -- Insertar datos en la tabla LineasPedido - Conjunto de inserciones correctas
 -- Productos permitidos para todos los clientes
@@ -66,13 +74,16 @@ INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio) VALUES
 (1, 3, 1, 9.99),     -- Libro Electrónico (permitido)
 (3, 2, 1, 1100.00),   -- Laptop (permitido)
 (3, 8, 2, 29.99),    -- Audífono (permitido)
-(3, 9, 1, 12.99);     -- Tableta (permitido)
-
+(3, 9, 1, 12.99),     -- Tableta (permitido)
+(4, 2, 1, 1100.00),   -- Laptop (permitido)
+(4, 8, 4, 29.99),    -- Audífono (permitido)
+(4, 9, 2, 12.99),     -- Tableta (permitido)
+(5, 9, 1, 13.99);     -- Tableta (permitido)
 
 -----------------------------------------------
 -- 3: Consultas
 -- 3.1: 
-SELECT u.nombre
+SELECT DISTINCT u.nombre
 FROM usuarios u JOIN clientes c ON u.id=c.usuarioId
 JOIN pedidos p ON p.clienteId=c.id
 RIGHT JOIN envios e ON e.id=p.envioId
@@ -80,12 +91,13 @@ WHERE e.id IS NULL OR e.estadoEnvio NOT LIKE 'Entregado';
 
 --------------------------------------------------------------------------------------------------------------
 -- 3.2: 
-SELECT e.id, e.fechaEnvio, e.estadoEnvio, SUM(lp.unidades*lp.precio) AS valorTotal
-FROM envios e JOIN pedidos p ON e.id=p.envioId
-JOIN lineaspedido lp ON lp.pedidoId=p.id
-WHERE e.estadoEnvio = 'Enviado'
-GROUP BY e.id
-ORDER BY valorTotal DESC;
+SELECT envios.id AS envioId, envios.fechaEnvio, COUNT(DISTINCT pedidos.clienteId) AS numeroClientes
+FROM envios
+JOIN pedidos ON pedidos.envioId = envios.id
+WHERE envios.fechaEntrega IS NULL
+GROUP BY envios.id
+HAVING numeroClientes > 1
+ORDER BY envios.fechaEnvio
 
 
 

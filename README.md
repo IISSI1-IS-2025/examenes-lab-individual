@@ -17,7 +17,7 @@ Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
 Necesitamos guardar información sobre los envíos realizados por la empresa y el estado de los mismos. Para ello se propone la creación de una nueva tabla llamada `Envios`. Cada pedido se enviará en un solo envío, pero en cada envío se podrán incluir varios pedidos (al menos uno). **(1 punto)**
 
-Además de la creación de la nueva tabla, adicionalmente tendrá que modificarse la tabla de pedidos de forma conveniente **(1 punto)**.
+Además de la creación de la nueva tabla, adicionalmente tendrá que modificarse la tabla de pedidos de forma conveniente **(1 punto)** para cumplir con la tercera forma normal (3FN).
 
 Para cada envío necesitamos conocer la fecha de creación del envío, la fecha de entrega (si la hay) y el estado del mismo, que puede ser "En preparación", "Enviado" o "Entregado". Asegure que la fecha de entrega (si la hay) es posterior a la fecha de envío. **(0,5 puntos)**
 
@@ -29,20 +29,23 @@ Incluya su solución en el fichero `2.solucionInsercionTabla.sql`.
 
 Inserte dos envíos en la nueva tabla con las siguientes características:
 
-Envío 1: fecha de envío 23-10-2025, sin fecha de entrega, estado "En preparación". Asociado a los pedidos 1 y 2.
-Envío 2: fecha de envío 03-06-2010, fecha de entrega 05-06-2010, estado "Entregado". Asdociado al pedido 3.
+Envío 1: fecha de envío 23/10/2025, sin fecha de entrega, estado "En preparación". Asociado a los pedidos 1 y 2.
+Envío 2: fecha de envío 03/06/2010, fecha de entrega 05/06/2010, estado "Entregado". Asociado al pedido 3.
+Envío 3: fecha de envío 22/10/2025, sin fecha de entrega, estado "En preparación". Asociado al pedido 5.
+
+Inserte de nuevo la información de los pedidos y líneas de pedido. Para los pedidos, recuerde incluir la referencia a los envíos y modificar lo necesario para cumplir con la tercera forma normal (3FN).
 
 **NOTA:** el fichero `2.solucionInsercionTabla.sql` incluye comentarios y código para facilitar el ejercicio.
 
-### 3. Consultas. 2 punto
+### 3. Consultas. 2,5 puntos
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 3.1. Consulta para listar el nombre de los usuarios cuyos pedidos no han sido entregados (1 punto)
+#### 3.1. Consulta para listar el nombre de los usuarios (sin repeticiones) que tengan al menos un pedido sin entregar (1 punto)
 
-#### 3.2. Consulta para visualizar el valor total de todos los envíos que estén "En preparación" junto con la fecha de creación del envío, ordenados decrecientemente según su valor. (1 puntos)
+#### 3.2. Consulta para mostrar los envíos sin fecha de entrega que contengan pedidos de más de un cliente distinto ordenados por fecha de envío. Para cada envío necesitamos el id de envío, la fecha de envío y el número de clientes distintos del envío (1,5 puntos) (1,5 puntos)
 
-### 4. Procedimiento. Dar de alta un nuevo envío. (2,5 puntos)
+### 4. Procedimiento. Dar de alta un nuevo envío. (2 puntos)
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 

@@ -41,9 +41,9 @@ Inserte de nuevo la información de los pedidos y líneas de pedido que se encue
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 3.1. Consulta para listar el nombre de los usuarios (sin repeticiones) que tengan al menos un pedido sin entregar (1 punto)
+#### 3.1. Consulta para listar el nombre de los usuarios (sin repeticiones) que tengan al menos un pedido sin entregar. (1 punto)
 
-#### 3.2. Consulta para mostrar los envíos sin fecha de entrega que contengan pedidos de más de un cliente distinto ordenados por fecha de envío. Para cada envío necesitamos el id de envío, la fecha de envío y el número de clientes distintos del envío (1,5 puntos) (1,5 puntos)
+#### 3.2. Consulta para mostrar los envíos sin fecha de entrega que contengan pedidos de más de un cliente distinto ordenados por fecha de envío. Para cada envío necesitamos el id de envío, la fecha de envío y el número de clientes distintos del envío (1,5 puntos). (1,5 puntos)
 
 ### 4. Procedimiento. Dar de alta un nuevo envío. (2 puntos)
 

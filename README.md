@@ -25,7 +25,7 @@ Para cada envío necesitamos conocer la fecha de creación del envío, la fecha 
 
 ### 2. Inserciones. (1 punto)
 
-Incluya su solución en el fichero `2.solucionInsercionTabla.sql`.
+Incluya su solución en el fichero `2.solucionInsercion.sql`.
 
 Inserte los siguientes envíos en la nueva tabla con las siguientes características:
 

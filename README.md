@@ -11,7 +11,7 @@ Las tablas y datos de prueba iniciales se encuentran en los ficheros `0.creacion
 
 Realice los siguientes ejercicios:
 
-### 1. Creación de tabla. 2,5 puntos
+### 1. Creación de tabla. (2,5 puntos)
 
 Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
@@ -23,7 +23,7 @@ Para cada envío necesitamos conocer la fecha de creación del envío, la fecha 
 
 **NOTA:** el fichero `1.solucionCreacionTabla.sql` incluye comentarios y código para facilitar el ejercicio.
 
-### 2. Inserciones. 1 punto
+### 2. Inserciones. (1 punto)
 
 Incluya su solución en el fichero `2.solucionInsercionTabla.sql`.
 
@@ -37,7 +37,7 @@ Inserte de nuevo la información de los pedidos y líneas de pedido que se encue
 
 **NOTA:** el fichero `2.solucionInsercion.sql` incluye comentarios y código para facilitar el ejercicio.
 
-### 3. Consultas. 2,5 puntos
+### 3. Consultas. (2,5 puntos)
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 

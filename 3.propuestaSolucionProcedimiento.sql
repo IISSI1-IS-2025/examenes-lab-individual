@@ -8,9 +8,13 @@ CREATE PROCEDURE insertar_producto_y_regalos(
     IN p_esParaRegalo BOOLEAN
 )
 BEGIN
+    -- Declaramos variables para datos del cliente
     DECLARE clienteMasAntiguoId INT;
     DECLARE clienteMasAntiguoDireccion VARCHAR(255);
     DECLARE clienteMasAntiguoCodigoPostal VARCHAR(10);
+    
+    -- Declaramos variable para guardar el ID del producto recién creado
+    DECLARE v_nuevoProductoId INT;
 
     -- Verificar si el producto es para regalo y su precio
     IF p_esParaRegalo AND p_precio > 50 THEN
@@ -21,9 +25,12 @@ BEGIN
     -- Iniciar transacción
     START TRANSACTION;
 
-    -- Insertar el producto
+    -- 1. Insertar el producto
     INSERT INTO Productos (nombre, descripcion, precio, tipoProductoId)
     VALUES (p_nombre, p_descripcion, p_precio, p_tipoProductoId);
+
+    -- 2. IMPORTANTE: Guardamos el ID del producto antes de hacer cualquier otro INSERT
+    SET v_nuevoProductoId = LAST_INSERT_ID();
 
     -- Si es para regalo, crear un pedido para el cliente más antiguo
     IF p_esParaRegalo THEN
@@ -33,13 +40,16 @@ BEGIN
         ORDER BY id ASC
         LIMIT 1;
 
-        -- Crear pedido
+        -- 3. Crear pedido
+        -- Al hacer este INSERT, LAST_INSERT_ID() cambiará al ID del nuevo pedido
         INSERT INTO Pedidos (fechaRealizacion, direccionEntrega, clienteId, comentarios)
         VALUES (CURDATE(), clienteMasAntiguoDireccion, clienteMasAntiguoId, 'Pedido de regalo');
 
-        -- Agregar línea de pedido con coste 0€
+        -- 4. Agregar línea de pedido
+        -- LAST_INSERT_ID() = ID del Pedido (recién creado arriba)
+        -- v_nuevoProductoId = ID del Producto (guardado previamente)
         INSERT INTO LineasPedido (pedidoId, productoId, unidades, precio)
-        VALUES (LAST_INSERT_ID(), LAST_INSERT_ID(), 1, 0);
+        VALUES (LAST_INSERT_ID(), v_nuevoProductoId, 1, 0);
     END IF;
 
     -- Confirmar transacción

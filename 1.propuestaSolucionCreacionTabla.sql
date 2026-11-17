@@ -1,17 +1,13 @@
-DROP TABLE IF EXISTS Garantias;
-CREATE TABLE Garantias (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    productoId INT NOT NULL,
+DROP TABLE IF EXISTS PlanesSalud;
+
+CREATE TABLE PlanesSalud (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animalId INT NOT NULL UNIQUE,
     fechaInicio DATE NOT NULL,
     fechaFin DATE NOT NULL,
-    esExtendida BOOLEAN NOT NULL,
-    FOREIGN KEY (productoId) REFERENCES Productos(id),
-    CHECK (fechaFin > fechaInicio),
-    UNIQUE (productoId)
+    incluyeCoberturaUrgencias BOOLEAN NOT NULL,
+    FOREIGN KEY (animalId) REFERENCES Animales(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    CHECK (fechaFin > fechaInicio)
 );
-
--- Ejemplo de inserción de datos
-INSERT INTO Garantias (productoId, fechaInicio, fechaFin, esExtendida)
-VALUES (1, '2024-01-01', '2026-01-01', TRUE),
-       (2, '2024-03-15', '2025-03-15', FALSE),
-       (3, '2024-05-10', '2027-05-10', TRUE);

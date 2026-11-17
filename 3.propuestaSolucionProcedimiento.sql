@@ -1,48 +1,50 @@
 DELIMITER //
 
-CREATE PROCEDURE actualizar_precio_producto_lineas(
-    IN p_productoId INT,
-    IN p_nuevoPrecio DECIMAL(10,2)
+CREATE PROCEDURE actualizar_precio_servicio_lineas_cita(
+    IN p_servicioId INT,
+    IN p_nuevoPrecio DECIMAL(10, 2)
 )
 BEGIN
-    DECLARE v_precioActual DECIMAL(10,2);
+    DECLARE v_precioActual DECIMAL(10, 2) DEFAULT NULL;
 
-    -- Iniciar transacción
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
     START TRANSACTION;
 
-    -- Obtener el precio actual del producto
     SELECT precio INTO v_precioActual
-    FROM Productos
-    WHERE id = p_productoId;
+    FROM Servicios
+    WHERE id = p_servicioId
+    FOR UPDATE;
 
-    -- Si el producto no existe, lanzar un error
     IF v_precioActual IS NULL THEN
-        ROLLBACK; -- Revertir cambios antes de salir
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Producto no encontrado';
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Servicio no encontrado';
     END IF;
 
-    -- Verificar que el nuevo precio no sea un 50% menor
+    IF p_nuevoPrecio IS NULL OR p_nuevoPrecio < 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El nuevo precio debe ser mayor o igual que cero';
+    END IF;
+
     IF p_nuevoPrecio < v_precioActual * 0.5 THEN
-        ROLLBACK; -- Revertir cambios antes de salir
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El nuevo precio no puede ser un 50% menor que el actual';
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'No se permite rebajar el precio más del 50%';
     END IF;
 
-    -- Actualizar el precio del producto
-    UPDATE Productos
+    UPDATE Servicios
     SET precio = p_nuevoPrecio
-    WHERE id = p_productoId;
+    WHERE id = p_servicioId;
 
-    -- Actualizar las líneas de pedido de pedidos no enviados
-    UPDATE LineasPedido
-    SET precio = p_nuevoPrecio
-    WHERE productoId = p_productoId
-      AND pedidoId IN (
-          SELECT id
-          FROM Pedidos
-          WHERE fechaEnvio IS NULL
-      );
+    UPDATE LineasCita lc
+    JOIN Citas c ON lc.citaId = c.id
+    SET lc.precio = p_nuevoPrecio
+    WHERE lc.servicioId = p_servicioId
+      AND c.estado = 'Pendiente';
 
-    -- Confirmar transacción
     COMMIT;
 END//
 

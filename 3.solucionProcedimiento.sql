@@ -1,14 +1,15 @@
 DELIMITER //
 
-CREATE PROCEDURE actualizar_precio_producto(
-    IN p_productoId INT,
+CREATE PROCEDURE actualizar_precio_servicio(
+    IN p_servicioId INT,
     IN p_nuevoPrecio DECIMAL(10, 2)
 )
--- incluya su solución a continuación
+BEGIN
+-- Incluya su solución a continuación
 
 
 
+-- Fin de su solución
+END//
 
-
--- fin de su solución
 DELIMITER ;

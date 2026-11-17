@@ -1,9 +1,11 @@
-DROP TABLE IF EXISTS LineasPedido;
-DROP TABLE IF EXISTS Productos;
-DROP TABLE IF EXISTS TiposProducto;
-DROP TABLE IF EXISTS Pedidos;
+DROP TABLE IF EXISTS PlanesSalud;
+DROP TABLE IF EXISTS LineasCita;
+DROP TABLE IF EXISTS Citas;
+DROP TABLE IF EXISTS Servicios;
+DROP TABLE IF EXISTS TiposServicio;
+DROP TABLE IF EXISTS Animales;
 DROP TABLE IF EXISTS Clientes;
-DROP TABLE IF EXISTS Empleados;
+DROP TABLE IF EXISTS Veterinarios;
 DROP TABLE IF EXISTS Usuarios;
 
 CREATE TABLE Usuarios (
@@ -13,98 +15,71 @@ CREATE TABLE Usuarios (
     nombre VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Empleados (
+CREATE TABLE Veterinarios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuarioId INT NOT NULL,
-    salario DECIMAL(10, 2) NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL CHECK (salario >= 0),
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
-        ON DELETE CASCADE 
+        ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
 CREATE TABLE Clientes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuarioId INT NOT NULL,
-    direccionEnvio VARCHAR(255) NOT NULL,
-    codigoPostal VARCHAR(10) NOT NULL,
-    fechaNacimiento DATE NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
     FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
-        ON DELETE CASCADE 
+        ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE Pedidos (
+CREATE TABLE Animales (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    fechaRealizacion DATE NOT NULL,
-    fechaEnvio DATE,
-    direccionEntrega VARCHAR(255) NOT NULL,
-    comentarios TEXT,
+    nombre VARCHAR(100) NOT NULL,
+    especie VARCHAR(100) NOT NULL,
+    fechaNacimiento DATE,
     clienteId INT NOT NULL,
-    empleadoId INT,
-    FOREIGN KEY (clienteId) REFERENCES Clientes(id) 
-        ON DELETE RESTRICT 
-        ON UPDATE RESTRICT,
-    FOREIGN KEY (empleadoId) REFERENCES Empleados(id) 
-        ON DELETE SET NULL 
-        ON UPDATE SET NULL
+    FOREIGN KEY (clienteId) REFERENCES Clientes(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
-CREATE TABLE TiposProducto (
+CREATE TABLE Citas (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL
+    fechaHora DATETIME NOT NULL,
+    estado ENUM('Pendiente', 'Realizada', 'Cancelada') NOT NULL DEFAULT 'Pendiente',
+    observaciones TEXT,
+    animalId INT NOT NULL,
+    veterinarioId INT,
+    FOREIGN KEY (animalId) REFERENCES Animales(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (veterinarioId) REFERENCES Veterinarios(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
 );
 
-CREATE TABLE Productos (
+CREATE TABLE TiposServicio (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Servicios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) NOT NULL,
-    descripción TEXT,
+    descripcion TEXT,
     precio DECIMAL(10, 2) NOT NULL CHECK (precio >= 0),
-    tipoProductoId INT NOT NULL,
-    puedeVenderseAMenores BOOLEAN NOT NULL DEFAULT FALSE,
-    FOREIGN KEY (tipoProductoId) REFERENCES TiposProducto(id)
+    tipoServicioId INT NOT NULL,
+    FOREIGN KEY (tipoServicioId) REFERENCES TiposServicio(id)
 );
 
-CREATE TABLE LineasPedido (
+CREATE TABLE LineasCita (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    pedidoId INT NOT NULL,
-    productoId INT NOT NULL,
+    citaId INT NOT NULL,
+    servicioId INT NOT NULL,
     unidades INT NOT NULL CHECK (unidades > 0 AND unidades <= 100),
     precio DECIMAL(10, 2) NOT NULL CHECK (precio >= 0),
-    FOREIGN KEY (pedidoId) REFERENCES Pedidos(id),
-    FOREIGN KEY (productoId) REFERENCES Productos(id),
-    UNIQUE (pedidoId, productoId)
+    FOREIGN KEY (citaId) REFERENCES Citas(id),
+    FOREIGN KEY (servicioId) REFERENCES Servicios(id),
+    UNIQUE (citaId, servicioId)
 );
-
-DELIMITER //
-
--- Restricción de edad mínima 14 años en Clientes
-CREATE TRIGGER cliente_edad_minima BEFORE INSERT ON Clientes
-FOR EACH ROW
-BEGIN
-    IF TIMESTAMPDIFF(YEAR, NEW.fechaNacimiento, CURDATE()) <= 14 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'El cliente debe tener más de 14 años.';
-    END IF;
-END //
-
--- Restricción en Pedidos para limitar productos no vendibles a menores
-CREATE TRIGGER check_edad_minorista BEFORE INSERT ON LineasPedido
-FOR EACH ROW
-BEGIN
-    DECLARE clienteEdad INT;
-    DECLARE ventaPermitida BOOLEAN;
-
-    SELECT TIMESTAMPDIFF(YEAR, fechaNacimiento, CURDATE()) INTO clienteEdad
-    FROM Clientes INNER JOIN Pedidos ON Clientes.id = Pedidos.clienteId
-    WHERE Pedidos.id = NEW.pedidoId;
-
-    SELECT puedeVenderseAMenores INTO ventaPermitida
-    FROM Productos WHERE id = NEW.productoId;
-
-    IF ventaPermitida = FALSE AND clienteEdad < 18 THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'El cliente debe tener al menos 18 años para comprar este producto.';
-    END IF;
-END //
-
-DELIMITER ;

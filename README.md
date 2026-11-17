@@ -1,13 +1,15 @@
-# Enunciado Evaluación Individual de Laboratorio - Modelo A
+# Enunciado Evaluación Individual de Laboratorio - Modelo B
 **Si usted entrega sin haber sido verificada su identidad no podrá ser evaluado.**
 
-## Tienda Online
+## Clínica veterinaria
 
-Partiendo de la `tiendaOnline` vista durante los laboratorios descrita en el modelado conceptual siguiente:
+![Diagrama UML de la estructura inicial](uml.png)
 
-![tiendaOnlineModeladoConceptual](https://github.com/user-attachments/assets/92eb4ba8-1ed8-488b-bb5b-448c0836fee6)
+Partiendo de la base de datos de una clínica veterinaria descrita en el fichero `0.creacionTablas.sql`, los datos iniciales se encuentran en `0.poblarBd.sql`. Para preparar y probar las soluciones, puede usar `0.poblarBdParaProbarSoluciones.sql`.
 
-Las tablas y datos de prueba iniciales se encuentran en los ficheros `0.creacionTablas.sql` y `0.poblarBd.sql`.
+### Diagrama UML de clases de la estructura inicial
+
+El diagrama representa las tablas iniciales de la base de datos. No incluye `PlanesSalud`, la tabla que se solicita crear en el ejercicio 1.
 
 Realice los siguientes ejercicios:
 
@@ -15,39 +17,37 @@ Realice los siguientes ejercicios:
 
 Incluya su solución en el fichero `1.solucionCreacionTabla.sql`.
 
-Necesitamos conocer la garantía de nuestros productos. Para ello se propone la creación de una nueva tabla llamada `Garantias`. Cada producto tendrá como máximo una garantía (no todos los productos tienen garantía), y cada garantía estará relacionada con un producto.
+La clínica ofrece planes de salud para los animales. Cree una tabla llamada `PlanesSalud`. Cada animal podrá tener como máximo un plan de salud y no todos los animales tendrán uno. Cada plan pertenecerá a un animal.
 
-Para cada garantía necesitamos conocer la fecha de inicio de la garantía, la fecha de fin de la garantía, si tiene garantía extendida o no.
-
-Asegure que la fecha de fin de la garantía es posterior a la fecha de inicio.
+Para cada plan se almacenará la fecha de inicio, la fecha de fin y si incluye cobertura de urgencias. Asegure que la fecha de fin sea posterior a la fecha de inicio.
 
 ### 2. Consultas SQL (DQL). (3 puntos)
 
 Incluya su solución en el fichero `2.solucionConsultas.sql`.
 
-#### 2.1. Devuelva el nombre del producto, nombre del tipo de producto, y precio unitario al que se vendieron los productos digitales (1 punto)
+#### 2.1. Devuelva el nombre del servicio, el nombre de su modalidad y el precio unitario de los servicios incluidos en citas de modalidad «Teleconsulta». (1 punto)
 
-#### 2.2. Consulta que devuelva el nombre del empleado, el número de pedidos de más de 500 euros gestionados en este año y el importe total de cada uno de ellos, ordenados de mayor a menor importe gestionado. Los empleados que no hayan gestionado ningún pedido, también deben aparecer. (2 puntos)
+#### 2.2. Devuelva el nombre de cada veterinario, el número de citas realizadas durante el año actual cuyo importe supere los 150 euros y el importe total de esas citas. Deben aparecer también los veterinarios que no hayan gestionado ninguna cita que cumpla estas condiciones. Ordene de mayor a menor importe total. (2 puntos)
 
-### 3. Procedimiento. Actualizar precio de un producto y líneas de pedido no enviadas. (3,5 puntos)
+### 3. Procedimiento. Actualizar precio de un servicio y líneas de citas pendientes. (3,5 puntos)
 
 Incluya su solución en el fichero `3.solucionProcedimiento.sql`.
 
-Cree un procedimiento que permita actualizar el precio de un producto dado y que modifique los precios de las líneas de pedido asociadas al producto dado solo en aquellos pedidos que aún no hayan sido enviados. (1,5 puntos)
+Cree un procedimiento que permita actualizar el precio de un servicio dado y que actualice también el precio de las líneas de cita asociadas a ese servicio únicamente cuando la cita esté pendiente. (1,5 puntos)
 
-Asegure que el nuevo precio no sea un 50% menor que el precio actual y lance excepción si se da el caso con el siguiente mensaje: (1 punto)
+Asegure que el nuevo precio no sea más de un 50% inferior al precio actual y lance una excepción si se incumple, con el siguiente mensaje: (1 punto)
 
 `No se permite rebajar el precio más del 50%`.
 
-Garantice que o bien se realizan todas las operaciones o bien no se realice ninguna. (1 punto)
+Garantice que o bien se realizan todas las operaciones o bien no se realiza ninguna. (1 punto)
 
 ### 4. Trigger. (2 puntos)
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
-Cree un trigger llamado `t_asegurar_mismo_tipo_producto_en_pedidos` que impida que, a partir de ahora, un mismo pedido incluya productos físicos y digitales.
+Cree un trigger llamado `t_asegurar_misma_modalidad_en_citas` que impida añadir a una cita un servicio cuya modalidad sea distinta de la modalidad de los servicios que ya contiene. Una cita sin servicios podrá recibir su primer servicio de cualquier modalidad.
 
-## Procedimiento de entrega:
+## Procedimiento de entrega
 
 ### 1. Comprimir ficheros
 
@@ -60,9 +60,9 @@ Cree un fichero `zip` que incluya los ficheros:
 
 ### 2. Subir fichero `zip`
 
-Súba el `zip` como fichero de solución en el examen de enseñanza virtual. **No pulse aún en enviar.**
+Suba el `zip` como fichero de solución en el examen de enseñanza virtual. **No pulse aún en enviar.**
 
-### 3. Avisar a profesor ANTES de realizar la entrega
+### 3. Avisar al profesor ANTES de realizar la entrega
 
 Antes de realizar la entrega, levante la mano y muestre su DNI o similar al profesor del aula para la verificación de su identidad.
 

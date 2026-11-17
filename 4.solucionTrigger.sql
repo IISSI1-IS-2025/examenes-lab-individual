@@ -1,9 +1,7 @@
 DELIMITER //
--- incluya su solución a continuación
+-- Incluya su solución a continuación
 
 
 
-
-
--- fin de su solución
+-- Fin de su solución
 DELIMITER ;

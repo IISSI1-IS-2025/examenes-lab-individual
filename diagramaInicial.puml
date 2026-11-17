@@ -1,0 +1,51 @@
+@startuml
+hide methods
+skinparam classAttributeIconSize 0
+
+class Usuario {
+    +email
+    +contraseña
+    +nombre
+}
+class Veterinario {
+    +salario
+}
+class Cliente {
+    +telefono
+}
+class Animal {
+
+    +nombre
+    +especie
+    +fechaNacimiento
+}
+class Cita {
+
+    +fechaHora
+    +estado: EstadoCita
+    +observaciones
+}
+enum EstadoCita {
+    Pendiente
+    Realizada
+    Cancelada
+}
+class Servicio {
+
+    +nombre
+    +descripcion
+    +precio
+}
+class ServicioCita {
+
+    +unidades
+    +precio
+}
+
+Veterinario --|> Usuario
+Cliente --|> Usuario
+Cliente "1" --> "0..*" Animal : tiene
+Animal "1" --> "0..*" Cita : esTratadoEn
+Veterinario "0..1" --> "0..*" Cita : atiende
+(Cita, Servicio) .. ServicioCita
+@enduml

@@ -5,7 +5,7 @@
 
 ![Diagrama UML de la estructura inicial](uml.png)
 
-Partiendo de la base de datos de una clínica veterinaria descrita en el fichero `0.creacionTablas.sql`, los datos iniciales se encuentran en `0.poblarBd.sql`. Para preparar y probar las soluciones, puede usar `0.poblarBdParaProbarSoluciones.sql`.
+Partiendo de la base de datos de una clínica veterinaria descrita en el fichero `0.creacionTablas.sql`, los datos iniciales se encuentran en `0.poblarBd.sql`. **Para preparar y probar las soluciones, puede usar `0.poblarBdParaProbarSoluciones.sql`**.
 
 ### Diagrama UML de clases de la estructura inicial
 
@@ -41,15 +41,25 @@ Asegure que el nuevo precio no sea más de un 50% inferior al precio actual y la
 
 Garantice que o bien se realizan todas las operaciones o bien no se realiza ninguna. (1 punto)
 
+### OTRA POSIBILIDAD 3. Función (1,5 puntos)
+
+Cree una función llamada `f_calcular_precio_cita` que calcule el precio total de una cita, sumando el precio de cada servicio solicitado en ella. Si el animal tiene contratado algún plan de salud vigente, los servicios incluidos en el plan NO se cobrarán en la cita. La función debe recibir como parámetro la cita y devolver el precio total. Si la cita no tiene servicios, debe devolver 0.
+
 ### 4. Trigger. (2 puntos)
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
 Cree un trigger llamado `t_asegurar_misma_modalidad_en_citas` que impida añadir a una cita un servicio cuya modalidad sea igual a la modalidad de los servicios que ya contiene. Una cita sin servicios podrá recibir su primer servicio de cualquier modalidad.
 
-### OTRA POSIBILIDAD 4. Función (2 puntos)
+### OTRA POSIBILIDAD 4. Trigger. (2 puntos)
 
-Cree una función llamada `f_calcular_precio_cita` que calcule el precio total de una cita, sumando el precio de cada servicio solicitado en ella. Si el animal tiene contratado algún plan de salud vigente, los servicios incluidos en el plan NO se cobrarán en la cita. La función debe recibir como parámetro la cita y devolver el precio total. Si la cita no tiene servicios, debe devolver 0.
+Incluya su solución en el fichero `4.solucionTrigger.sql`.
+
+Cree un trigger llamado `t_asegurar_un_unico_plan_vigente` que asegure que sólo exista, a lo sumo, un plan de salud vigente para cada animal. No pueden haber dos planes de salud asignados a un animal con fechas solapadas. Si se intenta añadir un plan de salud para un animal que ya tiene uno vigente, se pueden dar varias situaciones:
+
+    - Fecha de fin del nuevo plan es anterior a la fecha de fin del plan existente: se impide la asignación del nuevo plan de salud.
+    - Fecha de fin del nuevo plan es mayor a la fecha de fin del plan existente, pero la fecha de inicio del nuevo plan es menor o igual que la fecha de fin del plan existente: se asigna como nueva fecha de inicio el día posterior a la fecha de fin del plan de salud existente.
+    - En cualquier otro caso: se permite la creación del plan nuevo.
 
 ## Procedimiento de entrega
 

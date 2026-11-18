@@ -41,17 +41,17 @@ Asegure que el nuevo precio no sea más de un 50% inferior al precio actual y la
 
 Garantice que o bien se realizan todas las operaciones o bien no se realiza ninguna. (1 punto)
 
-### OTRA POSIBILIDAD 3. Función (1,5 puntos)
+### OTRA POSIBILIDAD 3. Función (2 puntos)
 
 Cree una función llamada `f_calcular_precio_cita` que calcule el precio total de una cita, sumando el precio de cada servicio solicitado en ella. Si el animal tiene contratado algún plan de salud vigente, los servicios incluidos en el plan NO se cobrarán en la cita. La función debe recibir como parámetro la cita y devolver el precio total. Si la cita no tiene servicios, debe devolver 0.
 
-### 4. Trigger. (2 puntos)
+### 4. Trigger. (1,5 puntos)
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 
 Cree un trigger llamado `t_asegurar_misma_modalidad_en_citas` que impida añadir a una cita un servicio cuya modalidad sea igual a la modalidad de los servicios que ya contiene. Una cita sin servicios podrá recibir su primer servicio de cualquier modalidad.
 
-### OTRA POSIBILIDAD 4. Trigger. (2 puntos)
+### OTRA POSIBILIDAD 4. Trigger. (3 puntos)
 
 Incluya su solución en el fichero `4.solucionTrigger.sql`.
 

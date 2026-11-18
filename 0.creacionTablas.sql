@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS PlanesSalud;
-DROP TABLE IF EXISTS LineasCita;
+DROP TABLE IF EXISTS ServiciosCita;
 DROP TABLE IF EXISTS Citas;
 DROP TABLE IF EXISTS Servicios;
 DROP TABLE IF EXISTS TiposServicio;
@@ -73,7 +73,7 @@ CREATE TABLE Servicios (
     FOREIGN KEY (tipoServicioId) REFERENCES TiposServicio(id)
 );
 
-CREATE TABLE LineasCita (
+CREATE TABLE ServiciosCita (
     id INT PRIMARY KEY AUTO_INCREMENT,
     citaId INT NOT NULL,
     servicioId INT NOT NULL,
